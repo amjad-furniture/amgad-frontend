@@ -14,7 +14,7 @@ function CategoryDetails() {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://104.248.251.235:8080/products/${id}/`,
+          `https://api.amgadfurniture.com/products/${id}/`,
           {
             method: "GET",
             headers: {

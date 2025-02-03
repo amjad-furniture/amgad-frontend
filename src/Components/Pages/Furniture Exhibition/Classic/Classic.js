@@ -17,7 +17,7 @@ function Classic() {
       setError("");
       try {
         const response = await axios.get(
-          "http://104.248.251.235:8080/products/",
+          "https://api.amgadfurniture.com/products/",
           { headers: { accept: "application/json" } }
         );
 

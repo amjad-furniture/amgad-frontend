@@ -28,7 +28,7 @@ function ContactUs() {
     };
     try {
       setLoading(true);
-      const response = await fetch("http://104.248.251.235:8080/support/", {
+      const response = await fetch("https://api.amgadfurniture.com/support/", {
         method: "POST",
         headers: {
           accept: "application/json",

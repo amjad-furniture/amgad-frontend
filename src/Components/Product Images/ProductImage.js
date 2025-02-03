@@ -9,7 +9,7 @@ function ProductImage() {
     async function fetchProductImages() {
       setLoading(true);
       try {
-        const response = await fetch("http://104.248.251.235:8080/products/?best_seller=true", {
+        const response = await fetch("https://api.amgadfurniture.com/products/?best_seller=true", {
           method: "GET",
           headers: {
             accept: "application/json",
