@@ -109,7 +109,7 @@ function Footer() {
       </Row>
       <hr className="hr" />
       <p className="reserved-rights">
-        الحقوق محفوظة | 2024 امجـــاد للاثاث الدمياطي الكلاسيكي
+        الحقوق محفوظة | 2025 للاثاث الدمياطي الكلاسيكي
       </p>
     </div>
   );
