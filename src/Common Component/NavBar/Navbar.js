@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="navbarContainer">
-      <div className="navbar-top" style={{ flexDirection: "" }}>
+      <div className="navbar-top" style={ { flexDirection: "" } }>
         <div className="contact-info">
           <div className="email">
             <p>
               <a
                 href="https://www.amgadfurniture202@gmail.com "
                 target="_blank"
-                style={{ textDecoration: "none", color: "#000" }}
+                style={ { textDecoration: "none", color: "#000" } }
                 rel="noreferrer"
               >
                 amgadfurniture202@gmail.com
@@ -71,38 +86,38 @@ function Navbar() {
         </a>
 
         <div
-          className={`hamburger ${menuOpen ? "open" : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
+          className={ `hamburger ${menuOpen ? "open" : ""}` }
+          onClick={ () => setMenuOpen(!menuOpen) }
         >
           <div />
           <div />
           <div />
         </div>
 
-        <div className={`menu  ${menuOpen ? "open" : ""}`}>
-          <Link to="/" style={{ textDecoration: "none" }}>
+        <div className={ `menu  ${menuOpen ? "open" : ""}` }>
+          <Link to="/" style={ { textDecoration: "none" } }>
             <p>الرئيسية</p>
           </Link>
           <Link to="/WhoWeAre">
             <p>من نحن</p>
           </Link>
-          <div className="dropdown">
-            <p>
+          <div className="dropdown" ref={ dropdownRef }>
+            <p onClick={ () => setDropdownOpen(!dropdownOpen) }>
               <img
                 src="/assets/images/arrow.png"
                 alt="dropdown arrow"
-                style={{ margin: "0px 10px 0px 10px" }}
+                style={ { margin: "0px 10px 0px 10px" } }
               />
               المعرض
             </p>
             <div
-              className="dropdown-options"
-              style={{ margin: "10px 0px 0px 0px", zIndex: "2" }}
+              className={ `dropdown-options ${dropdownOpen ? "show" : ""}` }
+              style={ { margin: "10px 0px 0px 0px", zIndex: "2" } }
             >
-              <Link to="/classic">
+              <Link to="/classic" onClick={ () => setDropdownOpen(false) }>
                 <p>أثاث كلاسيك</p>
               </Link>
-              <Link to="/Modren">
+              <Link to="/Modren" onClick={ () => setDropdownOpen(false) }>
                 <p>أثاث نيو كلاسيك</p>
               </Link>
             </div>

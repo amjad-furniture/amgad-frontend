@@ -92,6 +92,10 @@
       }
       .dropdown {
         position: relative;
+        
+        p {
+          cursor: pointer;
+        }
 
         .dropdown-options {
           display: none;
@@ -111,7 +115,7 @@
           }
         }
 
-        &:hover .dropdown-options {
+        .dropdown-options.show {
           display: block;
         }
       }
@@ -227,6 +231,10 @@
         }
         .dropdown {
           position: relative;
+          
+          p {
+            cursor: pointer;
+          }
 
           .dropdown-options {
             display: none;
@@ -246,7 +254,7 @@
             }
           }
 
-          &:hover .dropdown-options {
+          .dropdown-options.show {
             display: block;
           }
         }
