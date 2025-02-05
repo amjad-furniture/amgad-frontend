@@ -1,55 +1,196 @@
 .footer {
   width: 100%;
-  padding: 50px 0px 20px 0px;
+  background-color: #f8f9fa;
+  padding: 60px 0 20px;
   font-family: "Tajawal", sans-serif;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
   .row-items {
     display: flex;
-    gap: 70px;
-    justify-content: center;
+    gap: 40px;
+    justify-content: space-between;
+
     h5 {
-      font-size: 20px;
-    }
-    a {
-      text-decoration: none;
-      color: #000;
-    }
-    .logo {
-      width: 130px;
-      height: 103.4px;
-    }
-    .logo-text {
-      text-align: center;
-      color: #909090;
-    }
-  }
-  .hr {
-    width: 93%;
-    margin-top: 30px;
-    font-weight: bolder;
-    color: lightgray;
-  }
-  .reserved-rights {
-    padding: 10px 100px;
-  }
-}
-@media (max-width: 768px) {
-  .footer {
-    .row-items {
-      padding: 40px;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 18px;
-      .logo-text {
-        text-align: right;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        right: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #c8a165;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 60px;
       }
     }
-    .hr {
-      width: 90%;
-      margin: 30px auto;
+
+    .footer-brand {
+      .logo {
+        width: 130px;
+        height: auto;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      .logo-text {
+        color: #6c757d;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
     }
+
+    .footer-links, .footer-social, .footer-contact {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.8rem;
+          transform: translateX(0);
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: translateX(-5px);
+          }
+
+          a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            
+            &::before {
+              content: '';
+              position: absolute;
+              bottom: -2px;
+              right: 0;
+              width: 0;
+              height: 1px;
+              background-color: #c8a165;
+              transition: width 0.3s ease;
+            }
+
+            &:hover::before {
+              width: 100%;
+            }
+
+            img {
+              width: 16px;
+              height: 16px;
+              object-fit: contain;
+              transition: transform 0.3s ease;
+            }
+
+            &:hover img {
+              transform: scale(1.15);
+            }
+          }
+        }
+      }
+    }
+
+    .footer-about p {
+      color: #6c757d;
+      line-height: 1.8;
+    }
+
+    .contact-info li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.8rem;
+      color: #6c757d;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateX(-5px);
+        
+        img {
+          transform: scale(1.15);
+        }
+      }
+
+      img {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    
+    .hr {
+      border-color: #dee2e6;
+      margin: 0 auto;
+      width: 90%;
+      transition: width 0.3s ease;
+    }
+
+    &:hover .hr {
+      width: 100%;
+    }
+
     .reserved-rights {
-      padding: 20px;
       text-align: center;
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #c8a165;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 0;
+
+    .row-items {
+      flex-direction: column;
+      gap: 30px;
+      text-align: right;
+
+      .footer-brand {
+        text-align: center;
+      }
+
+      h5 {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .footer-bottom {
+      margin-top: 30px;
+      
+      .reserved-rights {
+        padding: 0 20px;
+      }
     }
   }
 }

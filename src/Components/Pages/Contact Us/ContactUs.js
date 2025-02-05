@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ContactUs.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Modal from "../../../Common Component/Modal/Modal";
+
 function ContactUs() {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(false);
@@ -54,6 +55,32 @@ function ContactUs() {
       console.error(error);
     }
   };
+
+  // Update the useEffect section
+  useEffect(() => {
+    const handleScroll = () => {
+      const reveals = document.querySelectorAll('.contactusContainer > div');
+
+      reveals.forEach((reveal) => {
+        const elementTop = reveal.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        // Adjust this value to control when the animation triggers
+        const triggerPoint = windowHeight * 0.85;
+
+        if (elementTop < triggerPoint) {
+          reveal.classList.add('scroll-visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Trigger once on mount
+    setTimeout(handleScroll, 100);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="contactusContainer">
       <div>
