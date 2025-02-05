@@ -58,23 +58,23 @@ function ContactUs() {
     <div className="contactusContainer">
       <div>
         <div
-          style={{ display: "flex", alignItems: "center", marginTop: "40px" }}
+          style={ { display: "flex", alignItems: "center", marginTop: "40px" } }
         >
           <img
             src="/assets/images/policy.png"
             alt="doc"
-            style={{ margin: "0px 5px 0px 5px" }}
+            style={ { margin: "0px 5px 0px 5px" } }
           />
           <h2>تواصل معنا</h2>
         </div>
-        <p style={{ marginTop: "0px" }}>
+        <p style={ { marginTop: "0px" } }>
           نحن هنا لمساعدتك والإجابة عن أي استفسارات. يمكنك التواصل معنا بسهولة
           من خلال أي من وسائل الاتصال التالية:
         </p>
       </div>
       <div>
         <h3>1. ساعات العمل</h3>
-        <div style={{ margin: "0px 10px 0px 10px" }}>
+        <div style={ { margin: "0px 10px 0px 10px" } }>
           <span>نحن نرحب بك خلال ساعات العمل الرسمية التالية:</span>
           <br />
           <span>⏰ الأحد - الخميس: 9:00 صباحًا - 9:00 مساءً</span>
@@ -84,7 +84,7 @@ function ContactUs() {
       </div>
       <div>
         <h3>2. الهاتف</h3>
-        <div style={{ margin: "0px 10px 0px 10px" }}>
+        <div style={ { margin: "0px 10px 0px 10px" } }>
           <span>
             يسعدنا استقبال مكالماتك للإجابة عن جميع استفساراتك ومساعدتك في
             طلباتك.
@@ -95,20 +95,20 @@ function ContactUs() {
       </div>
       <div>
         <h3>3. البريد الإلكتروني</h3>
-        <div style={{ margin: "0px 10px 0px 10px" }}>
+        <div style={ { margin: "0px 10px 0px 10px" } }>
           <span>
             إذا كنت تفضل مراسلتنا عبر البريد الإلكتروني، يمكنك إرسال استفساراتك،
             وسنحرص على الرد في أسرع وقت ممكن.
           </span>
           <br />
-          <span style={{ margin: "0px 5px 0px 5px" }}>
+          <span style={ { margin: "0px 5px 0px 5px" } }>
             ✉️ البريد الإلكتروني: [
             <a
-              style={{
+              style={ {
                 textDecoration: "none",
                 color: "darkblue",
                 fontWeight: "bolder",
-              }}
+              } }
               href="http://www.amgadfurniture202@gmail.com"
               target="blank"
             >
@@ -120,20 +120,20 @@ function ContactUs() {
       </div>
       <div>
         <h3>4. وسائل التواصل الاجتماعي</h3>
-        <div style={{ margin: "0px 10px 0px 10px" }}>
+        <div style={ { margin: "0px 10px 0px 10px" } }>
           <span>
             تابعنا على وسائل التواصل الاجتماعي لتكون على اطلاع دائم بآخر عروضنا
-            ومنتجاتنا:{" "}
+            ومنتجاتنا:{ " " }
           </span>
           <br />
-          <span style={{ margin: "0px 5px 0px 5px" }}>
+          <span style={ { margin: "0px 5px 0px 5px" } }>
             .فيسبوك: [
             <a
-              style={{
+              style={ {
                 textDecoration: "none",
                 color: "darkblue",
                 fontWeight: "bolder",
-              }}
+              } }
               href="https://www.facebook.com/profile.php?id=61568220981761"
               target="blank"
             >
@@ -142,14 +142,14 @@ function ContactUs() {
             ]
           </span>
           <br />
-          <span style={{ margin: "0px 5px 0px 5px" }}>
+          <span style={ { margin: "0px 5px 0px 5px" } }>
             .إنستغرام: [
             <a
-              style={{
+              style={ {
                 textDecoration: "none",
                 color: "darkblue",
                 fontWeight: "bolder",
-              }}
+              } }
               href="https://www.instagram.com/amgad_furniture202/"
               target="blank"
             >
@@ -158,14 +158,14 @@ function ContactUs() {
             ]
           </span>
           <br />
-          <span style={{ margin: "0px 5px 0px 5px" }}>
+          <span style={ { margin: "0px 5px 0px 5px" } }>
             .لينكد ان: [
             <a
-              style={{
+              style={ {
                 textDecoration: "none",
                 color: "darkblue",
                 fontWeight: "bolder",
-              }}
+              } }
               href="https://www.linkedin.com/in/amgad-furniture-37452433a/"
               target="blank"
             >
@@ -175,7 +175,7 @@ function ContactUs() {
           </span>
         </div>
       </div>
-      {/* location */}
+      {/* location */ }
       <div className="location">
         <div>
           <h3>5. الموقع</h3>
@@ -193,66 +193,73 @@ function ContactUs() {
           </span>
         </div>
       </div>
-      {/* contact form */}
+      {/* contact form */ }
       <div className="contactForm">
-        <div className="form">
-          <Formik
-            initialValues={intialValues}
-            validationSchema={validationShema}
-            onSubmit={handleSubmit}
-          >
-            <Form>
-              <div>
-                <label>الاسم</label>
-                <Field placeholder="الاسم*" className="input" name={"name"} />
-                <ErrorMessage name="name" component="div" className="error" />
-              </div>
-              <div>
-                <label>البريد الالكتروني</label>
-                <Field
-                  placeholder="البريد الالكتروني*"
-                  className="input"
-                  name={"email"}
-                />
-                <ErrorMessage name="email" component="div" className="error" />
-              </div>
-              <div>
-                <label>رقم الهاتف</label>
-                <Field
-                  placeholder="رقم الهاتف*"
-                  className="input"
-                  name={"phone_number"}
-                />
-                <ErrorMessage
-                  name="phone_number"
-                  component="div"
-                  className="error"
-                />
-              </div>
-              <div>
-                <label>الرسالة</label>
-                <Field
-                  placeholder="اكتب رسالتك هنا"
-                  className="message"
-                  name="message"
-                />
-                <ErrorMessage
-                  name="message"
-                  component="div"
-                  className="error"
-                />
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <button
-                  onSubmit={handleSubmit}
-                  style={{ fontSize: "16px", cursor: "pointer" }}
-                  type="submit"
-                >
-                  {loading ? "جاري  التحميل..." : "ارسال"}
-                </button>
-              </div>
-            </Form>
-          </Formik>
+        <div className="form-container">
+          <div className="form">
+            <h3 className="form-title">تواصل معنا</h3>
+            <Formik
+              initialValues={ intialValues }
+              validationSchema={ validationShema }
+              onSubmit={ handleSubmit }
+            >
+              <Form>
+                <div className="form-group">
+                  <label>الاسم</label>
+                  <Field placeholder="الاسم*" className="input" name={ "name" } />
+                  <ErrorMessage name="name" component="div" className="error" />
+                </div>
+                <div className="form-group">
+                  <label>البريد الالكتروني</label>
+                  <Field
+                    placeholder="البريد الالكتروني*"
+                    className="input"
+                    name={ "email" }
+                  />
+                  <ErrorMessage name="email" component="div" className="error" />
+                </div>
+                <div className="form-group">
+                  <label>رقم الهاتف</label>
+                  <Field
+                    placeholder="رقم الهاتف*"
+                    className="input"
+                    name={ "phone_number" }
+                  />
+                  <ErrorMessage
+                    name="phone_number"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>الرسالة</label>
+                  <Field
+                    placeholder="اكتب رسالتك هنا"
+                    className="message"
+                    name="message"
+                  />
+                  <ErrorMessage
+                    name="message"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+                <div className="form-action">
+                  <button
+                    onSubmit={ handleSubmit }
+                    type="submit"
+                    className="submit-button"
+                  >
+                    { loading ? (
+                      <div className="loader"></div>
+                    ) : (
+                      <span>ارسال</span>
+                    ) }
+                  </button>
+                </div>
+              </Form>
+            </Formik>
+          </div>
         </div>
         <div>
           <h3>
@@ -267,46 +274,46 @@ function ContactUs() {
           </p>
         </div>
       </div>
-      {showModal && (
-        <Modal isOpen={showModal}>
-          <div style={{ textAlign: "right" }}>
-            <button className="close-modal" onClick={() => setShowModal(false)}>
+      { showModal && (
+        <Modal isOpen={ showModal }>
+          <div style={ { textAlign: "right" } }>
+            <button className="close-modal" onClick={ () => setShowModal(false) }>
               X
             </button>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={ { textAlign: "center" } }>
             <div>
               <img
                 src="/assets/images/success-achievement-award-medal-winner-svgrepo-com 1.png"
                 alt="success"
-                width={"120px"}
+                width={ "120px" }
               />
             </div>
-            <h3 style={{ color: "#000" }}> لقد تم ارسال رسالتك بنجاح </h3>
+            <h3 style={ { color: "#000" } }> لقد تم ارسال رسالتك بنجاح </h3>
           </div>
         </Modal>
-      )}
-      {error && (
-        <Modal isOpen={error}>
-          <div style={{ textAlign: "right" }}>
-            <button className="close-modal" onClick={() => setError(false)}>
+      ) }
+      { error && (
+        <Modal isOpen={ error }>
+          <div style={ { textAlign: "right" } }>
+            <button className="close-modal" onClick={ () => setError(false) }>
               X
             </button>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={ { textAlign: "center" } }>
             <div>
               <img
                 src="/assets/images/fail.png"
                 alt="success"
-                width={"120px"}
+                width={ "120px" }
               />
             </div>
-            <h3 style={{ color: "red" }}>
+            <h3 style={ { color: "red" } }>
               حدث خطأ أثناء ارسال رسالتك حاول مرةأخري
             </h3>
           </div>
         </Modal>
-      )}
+      ) }
     </div>
   );
 }

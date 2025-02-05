@@ -1,110 +1,306 @@
 .contactusContainer {
-  padding: 0px 100px;
+  padding: 4rem max(2rem, 6%);
   font-family: "Tajawal", sans-serif;
-  h3 {
-    font-size: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  
+  // Modern background with subtle pattern
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 0% 0%, rgba(38, 7, 1, 0.03) 20%, transparent 70%),
+      radial-gradient(circle at 100% 100%, rgba(38, 7, 1, 0.03) 20%, transparent 70%),
+      linear-gradient(to bottom, #ffffff, #f8f9fa);
+    z-index: -1;
   }
-  .location {
-    display: flex;
-    align-items: center;
-    .map {
-      width: 553px;
-      height: 290px;
+
+  // Header styling
+  > div:first-child {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #260701;
+      border-radius: 2px;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        color: #260701;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    p {
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
     }
   }
-  .contactForm {
-    margin-top: 50px;
-    margin-bottom: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    .form {
-      background-color: #f5f5dc;
-      border-radius: 10px;
-      padding: 50px;
-      label {
-        color: #2b2b2b;
+
+  // Info sections styling
+  > div:not(:first-child):not(.contactForm):not(.location) {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(38, 7, 1, 0.06);
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    h3 {
+      color: #260701;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      
+      &::before {
+        content: '';
+        width: 4px;
+        height: 20px;
+        background: #260701;
+        border-radius: 2px;
+      }
+    }
+
+    div {
+      padding: 0.5rem 1.5rem;
+      
+      span {
         display: block;
-        margin-bottom: 10px;
-        margin-top: 10px;
-      }
-      .input {
-        padding: 10px;
-        border: 1px solid lightgray;
-        border-radius: 10px;
-        background-color: transparent;
-        width: 350px;
-        outline: none;
-      }
-      .message {
-        padding: 10px;
-        border: 1px solid lightgray;
-        border-radius: 10px;
-        background-color: transparent;
-        width: 350px;
-        height: 100px;
-        outline: none;
-      }
-      button {
-        background-color: #260701;
-        color: #fff;
-        text-align: center;
-        padding: 10px;
-        width: 380px;
-        border: none;
-        border-radius: 10px;
-        margin-top: 20px;
-        height: 52px;
-      }
-      .error {
-        color: red;
-        font-size: 10px;
-        font-weight: bolder;
-        margin-top: 5px;
+        margin-bottom: 0.8rem;
+        color: #555;
+        line-height: 1.7;
+        
+        a {
+          color: #260701;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.2s;
+          
+          &:hover {
+            color: #3a0901;
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
-  .close-modal {
-    background-color: transparent;
-    color: #000;
-    font-weight: bolder;
-    cursor: pointer;
-    text-align: right;
+
+  // Location section specific styling
+  .location {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    
+    div {
+      h3 {
+        color: #260701;
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+      }
+      
+      span {
+        display: block;
+        color: #555;
+        line-height: 1.7;
+        margin-bottom: 0.8rem;
+      }
+    }
+  }
+
+  // Contact Form Section
+  .contactForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+    margin: 4rem 0;
+
+    .form {
+      background: transparent;
+      
+      .form-title {
+        font-size: 1.8rem;
+        color: #1a1a1a;
+        margin-bottom: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+          display: block;
+          color: #444;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+        }
+
+        .input, .message {
+          width: 100%;
+          padding: 1rem;
+          border: 2px solid #eef0f2;
+          border-radius: 12px;
+          background: #f8f9fa;
+          transition: all 0.3s ease;
+          font-size: 1rem;
+
+          &:focus {
+            border-color: #260701;
+            background: #ffffff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(38, 7, 1, 0.1);
+          }
+        }
+
+        .message {
+          height: 140px;
+          resize: vertical;
+        }
+      }
+
+      .submit-button {
+        width: 100%;
+        padding: 1rem;
+        background: #260701;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        &:hover {
+          background: #3a0901;
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .info-text {
+      text-align: right;
+      
+      h3 {
+        font-size: 1.6rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      p {
+        color: #666;
+        line-height: 1.8;
+      }
+    }
   }
 }
 
+// Responsive adjustments
 @media (max-width: 768px) {
   .contactusContainer {
-    padding: 0px 20px;
-    margin-top: 80px;
-    .location {
-      display: flex;
-      flex-direction: column;
-      .map {
-        margin-top: 20px;
-        width: 360px;
-        height: 270px;
+    padding: 2rem 1rem;
+    
+    > div:not(:first-child):not(.contactForm):not(.location) {
+      padding: 1.5rem;
+      
+      div {
+        padding: 0.5rem;
       }
     }
-    .contactForm {
-      margin-top: 50px;
-      margin-bottom: 80px;
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      justify-content: space-around;
-      .form {
-        padding: 30px;
-        .input {
-          width: 250px;
-        }
-        .message {
-          width: 250px;
-        }
-        button {
-          width: 250px;
+    
+    > div:first-child {
+      div {
+        h2 {
+          font-size: 1.8rem;
         }
       }
+    }
+  }
+}
+
+// Loading Animation
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Add subtle animation for content appearance
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contactusContainer > div {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  
+  @for $i from 1 through 6 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
     }
   }
 }
