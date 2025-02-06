@@ -28,7 +28,10 @@ function Modren() {
           console.log("success modren");
           // Filter products with a valid category and name "Modern"
           const modernProducts = response.data.data.filter(
-            (product) => product.category && product.category.name === "Modern"
+            (product) =>
+              product.category &&
+              (product.category.name === "Modern" ||
+                product.category.name === "نيو كلاسيك")
           );
           setProducts(modernProducts);
           setSortedProducts(modernProducts);
