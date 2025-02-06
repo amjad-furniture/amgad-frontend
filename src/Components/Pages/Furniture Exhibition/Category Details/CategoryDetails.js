@@ -8,6 +8,7 @@ function CategoryDetails() {
   const [mainImage, setMainImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     async function getProductDetails() {
@@ -30,6 +31,8 @@ function CategoryDetails() {
             setMainImage(result.data.images[0].image);
           }
           setLoading(false);
+          // Add small delay before triggering animations
+          setTimeout(() => setIsLoaded(true), 100);
         } else {
           setError("Failed to fetch product details");
           setLoading(false);
@@ -45,11 +48,11 @@ function CategoryDetails() {
   if (loading) {
     return (
       <p
-        style={{
+        style={ {
           textAlign: "center",
           fontSize: "30px",
           fontFamily: "Amiri",
-        }}
+        } }
       >
         جاري تحميل البيانات....
       </p>
@@ -60,11 +63,11 @@ function CategoryDetails() {
     return (
       <p
         className="text-danger"
-        style={{
+        style={ {
           textAlign: "center",
           fontSize: "30px",
           fontFamily: "Amiri",
-        }}
+        } }
       >
         حدث خطأ أثناء تحميل البيانات
       </p>
@@ -74,11 +77,11 @@ function CategoryDetails() {
   if (!productDetail) {
     return (
       <p
-        style={{
+        style={ {
           textAlign: "center",
           fontSize: "30px",
           fontFamily: "Amiri",
-        }}
+        } }
       >
         لا يوجد منتجات لعرضها في الوقت الحالي
       </p>
@@ -88,36 +91,36 @@ function CategoryDetails() {
   return (
     <div className="category-details">
       <div className="image-section">
-        {mainImage && (
+        { mainImage && (
           <div className="main-image">
-            <img src={mainImage} alt="Main Product" />
+            <img src={ mainImage } alt="Main Product" />
           </div>
-        )}
-        {productDetail.images && productDetail.images.length > 0 && (
+        ) }
+        { productDetail.images && productDetail.images.length > 0 && (
           <div className="thumbnails">
-            {productDetail.images.map((image, index) => (
+            { productDetail.images.map((image, index) => (
               <img
-                key={index}
-                src={image.image}
-                alt={`Thumbnail ${index + 1}`}
-                onClick={() => setMainImage(image.image)}
-                className={mainImage === image.image ? "active" : ""}
+                key={ index }
+                src={ image.image }
+                alt={ `Thumbnail ${index + 1}` }
+                onClick={ () => setMainImage(image.image) }
+                className={ mainImage === image.image ? "active" : "" }
               />
-            ))}
+            )) }
           </div>
-        )}
+        ) }
       </div>
       <div>
-        <div className="product-details">
-          <h1>{productDetail.name}</h1>
-          <p style={{ textAlign: "left", fontWeight: "bolder" }}>
-            {productDetail.price} جنية
+        <div className={ `product-details ${isLoaded ? '' : 'fade-enter'}` }>
+          <h1>{ productDetail.name }</h1>
+          <p style={ { textAlign: "left", fontWeight: "bolder" } }>
+            { productDetail.price } جنية
           </p>
-          <p>{productDetail.description}</p>
+          <p>{ productDetail.description }</p>
         </div>
         <div
-          className="product-category"
-          style={{
+          className={ `product-category ${isLoaded ? '' : 'fade-enter'}` }
+          style={ {
             backgroundColor: "#F5F5DC",
             fontWeight: "bolder",
             borderRadius: "50px",
@@ -127,40 +130,46 @@ function CategoryDetails() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-          }}
+          } }
         >
-          {productDetail.category && productDetail.category.icon && (
+          { productDetail.category && productDetail.category.icon && (
             <img
-              src={productDetail.category.icon}
+              src={ productDetail.category.icon }
               alt=""
-              width={"20px"}
-              style={{ margin: "0px 10px 0px 10px" }}
+              width={ "20px" }
+              style={ { margin: "0px 10px 0px 10px" } }
             />
-          )}
-          <p style={{ padding: "0px", textAlign: "center" }}>
-            {productDetail.category
+          ) }
+          <p style={ { padding: "0px", textAlign: "center" } }>
+            { productDetail.category
               ? productDetail.category.name
-              : "No Category"}
+              : "No Category" }
           </p>
         </div>
-        <div className="product-specifications">
-          <h3 style={{ marginTop: "30px" }}>المواصفات</h3>
+        <div className={ `product-specifications ${isLoaded ? '' : 'fade-enter'}` }>
+          <h3 style={ { marginTop: "30px" } }>المواصفات</h3>
           <ul>
-            <li>اللون : {productDetail.color || "لايوجد لون لهذا المنتج"}</li>
-            <li>الطول_سم : {productDetail.length_cm || "لايوجد"}</li>
-            <li>العرض_سم : {productDetail.width_cm || "لايوجد"}</li>
-            <li>الارتفاع_سم : {productDetail.height_cm || "لا يوجد"}</li>
-            <li>العمق_سم : {productDetail.depth_cm || "لايوجد"}</li>
-            <li>المخزون : {productDetail.stock || "لايوجد"}</li>
-            <li>بلد_المنشأ : {productDetail.country_of_origin || "لايوجد"}</li>
-            <li>مادة الخشب : {productDetail.wood_material || "لايوجد"}</li>
-            <li>مادة القماش : {productDetail.fabric_material || "لايوجد"}</li>
-            <li>
-              مادة التنجيد : {productDetail.upholstery_material || "لايوجد"}
-            </li>
-            <li>
-              مدة الضمان بالشهر: {productDetail.warranty_months || "لايوجد"}
-            </li>
+            { [
+              { label: 'اللون', value: productDetail.color },
+              { label: 'الطول_سم', value: productDetail.length_cm },
+              { label: 'العرض_سم', value: productDetail.width_cm },
+              { label: 'الارتفاع_سم', value: productDetail.height_cm },
+              { label: 'العمق_سم', value: productDetail.depth_cm },
+              { label: 'المخزون', value: productDetail.stock },
+              { label: 'بلد_المنشأ', value: productDetail.country_of_origin },
+              { label: 'مادة الخشب', value: productDetail.wood_material },
+              { label: 'مادة القماش', value: productDetail.fabric_material },
+              { label: 'مادة التنجيد', value: productDetail.upholstery_material },
+              { label: 'مدة الضمان بالشهر', value: productDetail.warranty_months },
+            ].map((spec, index) => (
+              <li
+                key={ index }
+                className={ isLoaded ? '' : 'fade-enter' }
+                style={ { '--item-index': index } }
+              >
+                { spec.label } : { spec.value || "لايوجد" }
+              </li>
+            )) }
           </ul>
         </div>
       </div>

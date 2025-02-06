@@ -8,167 +8,206 @@ function Modren() {
   const [sortedProducts, setSortedProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [sortOption, setSortOption] = useState("none");
+  const [filters, setFilters] = useState({
+    price_min: '',
+    price_max: '',
+    color: '',
+    search: '',
+    best_seller: '',
+    order_by_price: ''
+  });
   const navigate = useNavigate();
-  useEffect(() => {
-    async function fetchProducts() {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          "https://api.amgadfurniture.com/products/",
-          {
-            headers: {
-              accept: "application/json",
-            },
-          }
-        );
 
-        if (response.data.status === "success") {
-          setLoading(false);
-          console.log("success modren");
-          // Filter products with a valid category and name "Modern"
-          const modernProducts = response.data.data.filter(
-            (product) =>
-              product.category &&
-              (product.category.name === "Modern" ||
-                product.category.name === "نيو كلاسيك")
-          );
-          setProducts(modernProducts);
-          setSortedProducts(modernProducts);
-        } else {
-          setLoading(true);
-          setError(error);
+  const fetchProducts = async (filterParams) => {
+    setLoading(true);
+    try {
+      const queryString = Object.entries(filterParams)
+        .filter(([_, value]) => value !== '')
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join('&');
+
+      const response = await axios.get(
+        `https://api.amgadfurniture.com/products/?${queryString}`,
+        {
+          headers: {
+            accept: "application/json",
+          },
         }
-      } catch (err) {
-        setLoading(false);
-        setError(error);
-        console.error("Error fetching data:", err);
-      }
-    }
+      );
 
-    fetchProducts();
-  }, [error]);
+      if (response.data.status === "success") {
+        const modernProducts = response.data.data.filter(
+          (product) =>
+            product.category &&
+            (product.category.name === "Modern" ||
+              product.category.name === "نيو كلاسيك")
+        );
+        setProducts(modernProducts);
+        setSortedProducts(modernProducts);
+        setLoading(false);
+      }
+    } catch (err) {
+      setLoading(false);
+      setError(true);
+      console.error("Error fetching data:", err);
+    }
+  };
 
   useEffect(() => {
-    // Sort products
-    let sorted = [...products];
-    if (sortOption === "low-to-high") {
-      sorted.sort((a, b) => a.price - b.price);
-    } else if (sortOption === "high-to-low") {
-      sorted.sort((a, b) => b.price - a.price);
-    }
-    setSortedProducts(sorted);
-  }, [sortOption, products]);
+    fetchProducts(filters);
+  }, [filters]);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   return (
     <div className="modern">
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={ { display: "flex", alignItems: "center" } }>
         <img
           src="/assets/images/gallery-round-svgrepo-com 1.png"
           alt="modern"
         />
-        <p style={{ fontWeight: "bolder", margin: "0px 10px 0px 10px" }}>
+        <p style={ { fontWeight: "bolder", margin: "0px 10px 0px 10px" } }>
           المعرض
-          <span style={{ color: "lightgray", margin: "0px 5px 0px 5px" }}>
+          <span style={ { color: "lightgray", margin: "0px 5px 0px 5px" } }>
             / أثاث مودرن
           </span>
         </p>
       </div>
 
-      {/* Price Filter */}
       <div className="filterContainer">
-        <label
-          htmlFor="sort"
-          style={{ margin: "10px", fontWeight: "bold", display: "inline" }}
-        >
-          ترتيب حسب :
-        </label>
-        <select
-          id="sort"
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          style={{
-            padding: "5px 20px 5px 20px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontSize: "14px",
-          }}
-        >
-          <option value="none">اختر</option>
-          <option value="low-to-high">السعر من الأقل إلى الأعلى</option>
-          <option value="high-to-low">السعر من الأعلى إلى الأقل</option>
-        </select>
+        <div className="filter-header">
+          <div className="filter-title">
+            <i className="fas fa-sliders-h"></i>
+            <h2>تصفية المنتجات</h2>
+          </div>
+          { Object.values(filters).some(value => value !== '') && (
+            <button
+              className="clear-filters"
+              onClick={ () => setFilters({
+                color: '',
+                search: '',
+                best_seller: '',
+                order_by_price: ''
+              }) }
+            >
+              <i className="fas fa-times"></i>
+              مسح الفلاتر
+            </button>
+          ) }
+        </div>
+
+        <div className="filter-body">
+          <div className="filter-group search-group">
+            <div className="input-with-icon">
+              <i className="fas fa-search"></i>
+              <input
+                type="text"
+                name="search"
+                placeholder="ابحث عن منتج..."
+                value={ filters.search }
+                onChange={ handleFilterChange }
+                className="filter-input"
+              />
+            </div>
+          </div>
+
+          <div className="filter-group">
+            <div className="select-wrapper">
+              <select
+                name="color"
+                value={ filters.color }
+                onChange={ handleFilterChange }
+                className="filter-select"
+              >
+                <option value="">جميع الألوان</option>
+                <option value="أبيض">أبيض</option>
+                <option value="بني">بني</option>
+                <option value="أسود">أسود</option>
+              </select>
+              <i className="fas fa-palette select-icon"></i>
+            </div>
+          </div>
+
+          <div className="filter-group checkbox-group">
+            <div className="checkbox-wrapper">
+              <label className="checkbox-container">
+                <input
+                  type="checkbox"
+                  name="best_seller"
+                  checked={ filters.best_seller === 'true' }
+                  onChange={ (e) => {
+                    setFilters(prev => ({
+                      ...prev,
+                      best_seller: e.target.checked ? 'true' : ''
+                    }));
+                  } }
+                  className="filter-checkbox"
+                />
+                <span className="checkmark"></span>
+                <span className="checkbox-label">الأكثر مبيعاً</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="filter-group">
+            <div className="select-wrapper">
+              <select
+                name="order_by_price"
+                value={ filters.order_by_price }
+                onChange={ handleFilterChange }
+                className="filter-select"
+              >
+                <option value="">الترتيب الافتراضي</option>
+                <option value="min">السعر: من الأقل إلى الأعلى</option>
+                <option value="max">السعر: من الأعلى إلى الأقل</option>
+              </select>
+              <i className="fas fa-sort-amount-down select-icon"></i>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="products">
-        {error ? (
-          <p
-            className="text-danger"
-            style={{
-              textAlign: "center",
-              fontSize: "30px",
-              fontFamily: "Amiri",
-            }}
-          >
-            حدث خطأ أثناء تحميل البيانات...
-          </p>
+        { error ? (
+          <p className="error-message">حدث خطأ أثناء تحميل البيانات...</p>
         ) : loading ? (
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: "30px",
-              fontFamily: "Amiri",
-            }}
-          >
-            جاري تحميل البيانات....
-          </p>
+          <p className="loading-message">جاري تحميل البيانات....</p>
         ) : products.length === 0 ? (
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: "30px",
-              fontFamily: "Amiri",
-            }}
-          >
-            لا يوجد منتجات لعرضها في الوقت الحالي
-          </p>
+          <p className="no-products-message">لا يوجد منتجات لعرضها في الوقت الحالي</p>
         ) : (
           <ul className="product-list">
-            {sortedProducts.map((product) => (
+            { sortedProducts.map((product) => (
               <li
-                key={product.id}
+                key={ product.id }
                 className="product-item"
-                onClick={() => navigate(`/Modren/${product.id}`)}
-                style={{ cursor: "pointer" }}
+                onClick={ () => navigate(`/Modren/${product.id}`) }
+                style={ { cursor: "pointer" } }
               >
                 <div className="product-images">
-                  {product.images.map((image) => (
-                    <img
-                      key={image.id}
-                      src={image.image}
-                      alt={`Product${product.name}image`}
-                    />
-                  ))}
+                  <img
+                    src={ product.images[0]?.image }
+                    alt={ `Product ${product.name} image` }
+                  />
                 </div>
                 <div className="detail">
-                  <h3>{product.name}</h3>
-                  <p style={{ fontWeight: "bolder" }}>
-                    السعر :{" "}
-                    <span
-                      style={{
-                        fontWeight: "lighter",
-                        margin: "10px 5px 0px 0px",
-                      }}
-                    >
-                      {product.price} جنية{" "}
+                  <h3>{ product.name }</h3>
+                  <p style={ { fontWeight: "bolder" } }>
+                    السعر :{ " " }
+                    <span style={ { fontWeight: "lighter", margin: "10px 5px 0px 0px" } }>
+                      { product.price } جنية{ " " }
                     </span>
                   </p>
                 </div>
               </li>
-            ))}
+            )) }
           </ul>
-        )}
+        ) }
       </div>
     </div>
   );

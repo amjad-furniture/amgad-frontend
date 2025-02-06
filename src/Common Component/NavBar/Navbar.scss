@@ -46,6 +46,11 @@
     position: relative;
     .logo {
       cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
     .hamburger {
       display: none;
