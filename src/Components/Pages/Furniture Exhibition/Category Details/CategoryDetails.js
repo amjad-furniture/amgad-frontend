@@ -9,6 +9,7 @@ function CategoryDetails() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     async function getProductDetails() {
@@ -107,6 +108,38 @@ function CategoryDetails() {
                 className={ mainImage === image.image ? "active" : "" }
               />
             )) }
+          </div>
+        ) }
+
+        {/* Add video button after thumbnails */ }
+        { productDetail.product_video && (
+          <button
+            className="video-button"
+            onClick={ () => setShowVideo(true) }
+          >
+            <i className="fas fa-play"></i>
+            عرض الفيديو
+          </button>
+        ) }
+
+        {/* Video Modal */ }
+        { showVideo && productDetail.product_video && (
+          <div className="video-modal">
+            <div className="video-content">
+              <button
+                className="close-button"
+                onClick={ () => setShowVideo(false) }
+              >
+                ✕
+              </button>
+              <video
+                controls
+                autoPlay
+                src={ productDetail.product_video }
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         ) }
       </div>
