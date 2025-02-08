@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./WhoWeAre.css";
 import { Row, Col } from "react-bootstrap";
+
 function WhoWeAre() {
+  useEffect(() => {
+    // Add intersection observer for scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    // Observe all items
+    document.querySelectorAll('.item1').forEach((item) => {
+      item.style.opacity = "0";
+      item.style.transform = "translateY(30px)";
+      observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="whoweareContainer">
       <div className="whoweareOutline">

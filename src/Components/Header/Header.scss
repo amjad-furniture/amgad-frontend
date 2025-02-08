@@ -9,13 +9,19 @@
       width: 700px;
       height: 350px;
       border-radius: 10px;
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
   .amjad-media {
     height: 45px;
     width: 270px;
     margin: 0px 50px 0px 0px;
+    transition: all 0.3s ease;
     &:hover{
+      transform: translateY(-2px);
       background-color: #260701;
       color: #fff;
     }
@@ -25,7 +31,9 @@
     height: 45px;
     width: 200px;
     cursor: pointer;
+    transition: all 0.3s ease;
     &:hover {
+      transform: translateY(-2px);
       background-color: #260701;
       color: #fff;
     }
@@ -33,12 +41,14 @@
   .close-vedio{
     color: #fff;
     border: none;
+    transition: all 0.3s ease;
     &:hover{
       background-color: transparent;
       border-radius: 10px;
       border: 2px solid #260701;
       color: #000;
       font-weight: bolder;
+      transform: scale(1.05);
     }
   }
   .reasons {
@@ -59,9 +69,28 @@
       &:first-child {
         border-right: none;
       }
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: translateY(-5px);
+      }
     }
   }
+  .video-container {
+    animation: fadeIn 0.3s ease-in;
+  }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
   .headerContainer {
     padding: 50px;

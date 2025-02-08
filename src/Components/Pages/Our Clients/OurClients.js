@@ -7,7 +7,7 @@ function OurClients() {
       <div className="hero-section">
         <div className="hero-content">
           <img
-            src="/assets/images/users-svgrepo-com 1.png"
+            src="/assets/images/usersIcon.svg"
             alt="our_clients"
             className="hero-icon"
           />
@@ -76,7 +76,27 @@ function OurClients() {
                 <p>تعكس الأصالة والجمال.</p>
               </div>
             </div>
-            {/* Repeat for other features */ }
+            <div className="feature-card">
+              <img src="/assets/images/Subtract.png" alt="Quality" />
+              <div className="feature-content">
+                <h3>جودة عالية</h3>
+                <p>مواد فاخرة وحرفية متميزة</p>
+              </div>
+            </div>
+            <div className="feature-card">
+              <img src="/assets/images/Subtract.png" alt="Service" />
+              <div className="feature-content">
+                <h3>خدمة عملاء متميزة</h3>
+                <p>دعم مستمر ومتابعة احترافية</p>
+              </div>
+            </div>
+            <div className="feature-card">
+              <img src="/assets/images/Subtract.png" alt="Delivery" />
+              <div className="feature-content">
+                <h3>توصيل سريع وآمن</h3>
+                <p>خدمة شحن موثوقة لجميع المناطق</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

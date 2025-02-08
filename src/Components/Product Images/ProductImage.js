@@ -5,6 +5,8 @@ function ProductImage() {
   const [productImages, setProductImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   useEffect(() => {
     async function fetchProductImages() {
       setLoading(true);
@@ -37,50 +39,71 @@ function ProductImage() {
     fetchProductImages();
   }, [error]);
 
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
+
   return (
-    <div className="products" style={{ padding: "0px 70px 70px 70px" }}>
-      {error ? (
+    <div className="products" style={ { padding: "0px 70px 70px 70px" } }>
+      { error ? (
         <p
           className="text-danger"
-          style={{
+          style={ {
             textAlign: "center",
             fontSize: "30px",
             fontFamily: "Amiri",
-          }}
+          } }
         >
           حدث خطأ أثناء تحميل البيانات
         </p>
       ) : loading ? (
         <p
-          style={{
+          style={ {
             textAlign: "center",
             fontSize: "30px",
             fontFamily: "Amiri",
-          }}
+          } }
         >
           جاري تحميل البيانات....
         </p>
       ) : productImages.length === 0 ? (
         <p
-          style={{
+          style={ {
             textAlign: "center",
             fontSize: "30px",
             fontFamily: "Amiri",
-          }}
+          } }
         >
           لا يوجد منتجات لعرضها في الوقت الحالي
         </p>
       ) : (
         <>
-          <h1 style={{ textAlign: "center" }}>منتجات اكثر مبيعا</h1>
-          <p style={{ textAlign: "center" }}>تصفح مختلف الصوالين الموجودة</p>
-          <div className="product-image-gallery" style={{ marginTop: "50px" }}>
-            {productImages.map((image, index) => (
-              <img key={index} src={image} alt="product-image" />
-            ))}
+          <h1 style={ { textAlign: "center" } }>منتجات اكثر مبيعا</h1>
+          <p style={ { textAlign: "center" } }>تصفح مختلف الصوالين الموجودة</p>
+          { selectedImage && (
+            <div className="modal-overlay" onClick={ handleCloseModal }>
+              <div className="modal-content">
+                <img src={ selectedImage } alt="preview" />
+              </div>
+            </div>
+          ) }
+          <div className="product-image-gallery" style={ { marginTop: "50px" } }>
+            { productImages.map((image, index) => (
+              <img
+                key={ index }
+                src={ image }
+                alt="product-image"
+                onClick={ () => handleImageClick(image) }
+                style={ { cursor: 'pointer' } }
+              />
+            )) }
           </div>
         </>
-      )}
+      ) }
     </div>
   );
 }
