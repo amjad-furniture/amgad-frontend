@@ -144,12 +144,19 @@ function CategoryDetails() {
                 className="close-button"
                 onClick={ () => setShowVideo(false) }
               >
-                ✕
+                ×
               </button>
               <video
                 controls
                 autoPlay
                 src={ productDetail.product_video }
+                style={ {
+                  maxWidth: "100%",
+                  maxHeight: "90vh",
+                  width: "auto",
+                  height: "auto",
+                  aspectRatio: "auto"
+                } }
               >
                 Your browser does not support the video tag.
               </video>
@@ -208,15 +215,17 @@ function CategoryDetails() {
               { label: 'مادة القماش', value: productDetail.fabric_material },
               { label: 'مادة التنجيد', value: productDetail.upholstery_material },
               { label: 'مدة الضمان بالشهر', value: productDetail.warranty_months },
-            ].map((spec, index) => (
-              <li
-                key={ index }
-                className={ isLoaded ? '' : 'fade-enter' }
-                style={ { '--item-index': index } }
-              >
-                { spec.label } : { spec.value || "لايوجد" }
-              </li>
-            )) }
+            ]
+              .filter(spec => spec.value)
+              .map((spec, index) => (
+                <li
+                  key={ index }
+                  className={ isLoaded ? '' : 'fade-enter' }
+                  style={ { '--item-index': index } }
+                >
+                  { spec.label } : { spec.value }
+                </li>
+              )) }
           </ul>
         </div>
       </div>
