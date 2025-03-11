@@ -94,7 +94,16 @@ function CategoryDetails() {
       <div className="image-section">
         { mainImage && (
           <div className="main-image">
-            <img src={ mainImage } alt="Main Product" />
+            <img
+              src={ mainImage }
+              alt="Main Product"
+              style={ {
+                objectFit: "contain",
+                width: "100%",
+                height: "100%",
+                maxHeight: "500px"
+              } }
+            />
           </div>
         ) }
         { productDetail.images && productDetail.images.length > 0 && (
@@ -106,6 +115,11 @@ function CategoryDetails() {
                 alt={ `Thumbnail ${index + 1}` }
                 onClick={ () => setMainImage(image.image) }
                 className={ mainImage === image.image ? "active" : "" }
+                style={ {
+                  objectFit: "cover",
+                  width: "100px",
+                  height: "100px"
+                } }
               />
             )) }
           </div>
