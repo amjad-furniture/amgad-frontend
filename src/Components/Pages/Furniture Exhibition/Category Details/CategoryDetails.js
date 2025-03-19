@@ -167,9 +167,11 @@ function CategoryDetails() {
       <div>
         <div className={ `product-details ${isLoaded ? '' : 'fade-enter'}` }>
           <h1>{ productDetail.name }</h1>
-          <p style={ { textAlign: "left", fontWeight: "bolder" } }>
-            { productDetail.price } جنية
-          </p>
+          { productDetail.price ? (
+            <p style={ { textAlign: "left", fontWeight: "bolder" } }>
+              { productDetail.price } جنية
+            </p>
+          ) : null }
           <p>{ productDetail.description }</p>
         </div>
         <div
