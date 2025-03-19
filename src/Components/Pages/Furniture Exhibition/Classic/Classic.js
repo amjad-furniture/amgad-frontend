@@ -194,12 +194,14 @@ function Classic() {
                 </div>
                 <div className="detail">
                   <h3>{ product.name }</h3>
-                  <p style={ { fontWeight: "bolder" } }>
-                    السعر :{ " " }
-                    <span style={ { fontWeight: "lighter", margin: "10px 5px 0px 0px" } }>
-                      { product.price } جنية{ " " }
-                    </span>
-                  </p>
+                  { product.price ? (
+                    <p style={ { fontWeight: "bolder" } }>
+                      السعر :{ " " }
+                      <span style={ { fontWeight: "lighter", margin: "10px 5px 0px 0px" } }>
+                        { product.price } جنية{ " " }
+                      </span>
+                    </p>
+                  ) : null }
                 </div>
               </li>
             )) }
