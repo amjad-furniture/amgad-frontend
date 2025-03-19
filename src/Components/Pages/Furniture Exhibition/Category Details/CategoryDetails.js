@@ -202,34 +202,49 @@ function CategoryDetails() {
               : "No Category" }
           </p>
         </div>
-        <div className={ `product-specifications ${isLoaded ? '' : 'fade-enter'}` }>
-          <h3 style={ { marginTop: "30px" } }>المواصفات</h3>
-          <ul>
-            { [
-              { label: 'اللون', value: productDetail.color },
-              { label: 'الطول_سم', value: productDetail.length_cm },
-              { label: 'العرض_سم', value: productDetail.width_cm },
-              { label: 'الارتفاع_سم', value: productDetail.height_cm },
-              { label: 'العمق_سم', value: productDetail.depth_cm },
-              { label: 'المخزون', value: productDetail.stock },
-              { label: 'بلد_المنشأ', value: productDetail.country_of_origin },
-              { label: 'مادة الخشب', value: productDetail.wood_material },
-              { label: 'مادة القماش', value: productDetail.fabric_material },
-              { label: 'مادة التنجيد', value: productDetail.upholstery_material },
-              { label: 'مدة الضمان بالشهر', value: productDetail.warranty_months },
-            ]
-              .filter(spec => spec.value)
-              .map((spec, index) => (
-                <li
-                  key={ index }
-                  className={ isLoaded ? '' : 'fade-enter' }
-                  style={ { '--item-index': index } }
-                >
-                  { spec.label } : { spec.value }
-                </li>
-              )) }
-          </ul>
-        </div>
+        {/* Only show specifications section if there are specs to display */ }
+        { [
+          productDetail.color,
+          productDetail.length_cm,
+          productDetail.width_cm,
+          productDetail.height_cm,
+          productDetail.depth_cm,
+          productDetail.stock,
+          productDetail.country_of_origin,
+          productDetail.wood_material,
+          productDetail.fabric_material,
+          productDetail.upholstery_material,
+          productDetail.warranty_months,
+        ].some(value => value) && (
+            <div className={ `product-specifications ${isLoaded ? '' : 'fade-enter'}` }>
+              <h3 style={ { marginTop: "30px" } }>المواصفات</h3>
+              <ul>
+                { [
+                  { label: 'اللون', value: productDetail.color },
+                  { label: 'الطول_سم', value: productDetail.length_cm },
+                  { label: 'العرض_سم', value: productDetail.width_cm },
+                  { label: 'الارتفاع_سم', value: productDetail.height_cm },
+                  { label: 'العمق_سم', value: productDetail.depth_cm },
+                  { label: 'المخزون', value: productDetail.stock },
+                  { label: 'بلد_المنشأ', value: productDetail.country_of_origin },
+                  { label: 'مادة الخشب', value: productDetail.wood_material },
+                  { label: 'مادة القماش', value: productDetail.fabric_material },
+                  { label: 'مادة التنجيد', value: productDetail.upholstery_material },
+                  { label: 'مدة الضمان بالشهر', value: productDetail.warranty_months },
+                ]
+                  .filter(spec => spec.value)
+                  .map((spec, index) => (
+                    <li
+                      key={ index }
+                      className={ isLoaded ? '' : 'fade-enter' }
+                      style={ { '--item-index': index } }
+                    >
+                      { spec.label } : { spec.value }
+                    </li>
+                  )) }
+              </ul>
+            </div>
+          ) }
       </div>
     </div>
   );
